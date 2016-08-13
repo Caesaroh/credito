@@ -1,0 +1,29 @@
+<div ng-controller="clientes">
+    <div class="pull-right">
+        <a href="#/clientes/nuevo" class="btn btn-success">Nuevo</a>
+    </div>
+    <input type="text" ng-model="filtro" class="form-control"/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Número</th>
+            <th>Nombre</th>
+            <th>Régimen</th>
+            <th>RFC</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="cliente in clientes | filter:filtro">
+            <td>{{cliente.id}}</td>
+            <td>{{cliente.nombre}}</td>
+            <td>
+                <span ng-hide="cliente.regimen">Persona Física</span>
+                <span ng-show="cliente.regimen">Persona Moral</span>
+            </td>
+            <td>{{cliente.rfc}}</td>
+            <td><a href="#/clientes/editar/{{cliente.id}}" class="btn btn-primary btn-xs">Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
