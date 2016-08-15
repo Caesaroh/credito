@@ -1,0 +1,109 @@
+<div ng-controller="venta">
+    <form name="form" novalidate>
+        <div class="row">
+            <div class="pull-right">
+                <a ng-show="venta.folio" ng-click="eliminar()" class="btn btn-danger">Eliminar</a>
+                <a ng-click="guardar(form.$invalid)" class="btn btn-success">Guardar</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6">
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" ng-model="venta.fecha" class="form-control" name="fecha" required/>
+                    <p ng-show="form.fecha.$error.required && b" class="text-danger">Debe introducir una fecha</p>
+                </div>
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <ui-select ng-model="venta.cliente" theme="bootstrap" name="cliente" required>
+                        <ui-select-match placeholder="Seleccione un Cliente">{{$select.selected.nombre}}</ui-select-match>
+                        <ui-select-choices repeat="cliente in clientes | filter: $select.search">
+                            <span ng-bind-html="cliente.nombre | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <p ng-show="form.cliente.$error.required && b" class="text-danger">Debe selecciónar un cliente</p>
+                </div>
+            </div>
+            <div ng-show="venta.cliente" class="col col-lg-6">
+                <p><strong>Domicilio: </strong>{{venta.cliente.calle + " " + venta.cliente.numero + ", " + venta.cliente.colonia + ", " + venta.cliente.municipio + ", " + venta.cliente.estado + ", CP." + venta.cliente.cp}}</p>
+                <p><strong>RFC: </strong>{{venta.cliente.rfc}}</p>
+                <p><strong>Teléfono: </strong>{{venta.cliente.telefono}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <h4 class="pull-left">Detalle</h4>
+            <a ng-click="add()" class="btn btn-default pull-right">Agregar línea</a>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Tasa IVA</th>
+                    <th>Tasa IEPS</th>
+                    <th>Importe</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in venta.rows">
+                    <td>
+                        <ui-select ng-model="row.producto" theme="bootstrap" name="tipo" required>
+                            <ui-select-match placeholder="Seleccione producto">{{$select.selected.codigo}}</ui-select-match>
+                            <ui-select-choices repeat="producto in productos | filter: $select.search">
+                                <span ng-bind-html="producto.codigo | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </td>
+                    <td>
+                        <textarea ng-model="row.producto.descripcion" ng-disabled="true" class="form-control"></textarea>
+                    </td>
+                    <td><input ng-model="row.cantidad" type="text" class="form-control" onkeypress="return justNumbers(event)"/></td>
+                    <td>
+                        <input ng-model="row.producto.precio" ng-disabled="true" type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input ng-model="row.producto.iva.label" ng-disabled="true" type="text" class="form-control">
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input ng-model="row.producto.ieps" ng-disabled="true" type="text" class="form-control"></td>
+                                <td>
+                                    <input ng-model="row.iepsUnidad" type="checkbox" tooltip="Agregar IEPS por unidad"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <span ng-show="row.cantidad && row.producto">
+                            {{importe(row) | currency}}
+                        </span>
+                    </td>
+                    <td><a ng-show="venta.rows.length > 1" ng-click="remove($index)"><span class="glyphicon glyphicon-remove text-danger"></span></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Subtotal</th>
+                    <th>Total IVA</th>
+                    <th>Total IEPS</th>
+                    <th>Total Factura</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{subTotal(venta.rows) | currency}}</td>
+                    <td>{{totalIVA(venta.rows) | currency}}</td>
+                    <td>{{totalIEPS(venta.rows) | currency}}</td>
+                    <td>{{total(venta.rows) | currency}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

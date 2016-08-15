@@ -1,0 +1,27 @@
+<div ng-controller="productos">
+    <div class="pull-right">
+        <a href="#/productos/nuevo" class="btn btn-success">Nuevo</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Unidad</th>
+            <th>Precio</th>
+            <th>IVA</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="producto in productos">
+            <td>{{producto.codigo}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td>{{producto.unidad}}</td>
+            <td>{{producto.precio | currency}}</td>
+            <td>{{producto.iva.label}}</td>
+            <td><a href="#/productos/editar/{{producto.codigo}}" class="btn btn-primary btn-xs">Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

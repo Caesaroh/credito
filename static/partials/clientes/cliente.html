@@ -1,0 +1,66 @@
+<div ng-controller="cliente">
+    <form name="form" novalidate>
+        <div class="row">
+            <div class="pull-right">
+                <a ng-show="cliente.id" ng-click="eliminar()" class="btn btn-danger">Eliminar</a>
+                <a ng-click="guardar(form)" class="btn btn-success">Guardar</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="regimen">Tipo de Régimen</label>
+            <select ng-model="cliente.regimen" ng-options="regimen.nombre for regimen in regimenes" class="form-control" id="regimen"></select>
+        </div>
+        <div class="form-group">
+            <label for="regimen">Nombre o Razón Social</label>
+            <input type="text" ng-model="cliente.nombre" class="form-control" name="nombre" required/>
+            <p ng-show="form.nombre.$error.required && b" class="text-danger">Es necesario introducir un nombre o razó social</p>
+        </div>
+        <div ng-hide="cliente.regimen.id">
+            <div class="form-group">
+                <label for="apellidoPaterno">Apellido Paterno</label>
+                <input type="text" ng-model="cliente.apellidoPaterno" class="form-control" id="apellidoPaterno"/>
+            </div>
+            <div class="form-group">
+                <label for="apellidoMaterno">Apellido Materno</label>
+                <input type="text" ng-model="cliente.apellidoMaterno" class="form-control" id="apellidoMaterno"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Correo Electrónico</label>
+            <input type="email" ng-model="cliente.correo" class="form-control" name="correo"/>
+            <p ng-show="form.correo.$error.email && b" class="text-danger">El formato del correo es incorrecto</p>
+        </div>
+        <div class="form-group">
+            <label>RFC</label>
+            <input ng-model="cliente.rfc" ui-mask="{{mascara()}}" type="text" name="rfc" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Calle</label>
+            <input type="text" ng-model="cliente.calle" class="form-control" id="calle"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Teléfono</label>
+            <input type="text" ng-model="cliente.telefono" class="form-control" onkeypress="return justNumbers(event)" id="telefono"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Número</label>
+            <input type="text" ng-model="cliente.numero" class="form-control" onkeypress="return justNumbers(event)" id="numero"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Colonia</label>
+            <input type="text" ng-model="cliente.colonia" class="form-control" id="colonia"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Delegación o Municipio</label>
+            <input type="text" ng-model="cliente.municipio" class="form-control" id="municipio"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Estado</label>
+            <input type="text" ng-model="cliente.estado" class="form-control" id="estado"/>
+        </div>
+        <div class="form-group">
+            <label for="apellidoMaterno">Código Postal</label>
+            <input type="text" ng-model="cliente.cp" class="form-control" onkeypress="return justNumbers(event)" id="cp"/>
+        </div>
+    </form>
+</div>

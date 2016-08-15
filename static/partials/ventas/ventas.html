@@ -1,0 +1,23 @@
+<div ng-controller="ventas">
+    <div class="pull-right">
+        <a href="#/ventas/nuevo" class="btn btn-success">Nuevo</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Folio</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="venta in ventas">
+            <td>{{venta.folio}}</td>
+            <td>{{venta.fecha}}</td>
+            <td>{{venta.cliente.nombre}}</td>
+            <td><a href="#/ventas/ver/{{venta.folio}}" class="btn btn-primary btn-xs">Ver</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
