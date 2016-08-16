@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Caesaroh/credito",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mysql": "^2.11.1",
+    "sequelize": "^3.24.0"
   }
 }
