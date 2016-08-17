@@ -1,0 +1,21 @@
+<div ng-controller="clientes">
+    <div class="pull-right">
+        <a href="#/clientes/nuevo" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo Cliente</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Clave Cliente</th>
+            <th>Nombre</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="cliente in clientes">
+            <td>{{cliente.id}}</td>
+            <td>{{cliente.nombre}}</td>
+            <td><a href="#/clientes/editar/{{cliente.id}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

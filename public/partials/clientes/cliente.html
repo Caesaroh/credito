@@ -1,0 +1,29 @@
+<div ng-controller="cliente">
+    <form name="form" novalidate>
+        <div class="row">
+            <div class="pull-right">
+                <a ng-show="cliente.id" ng-click="eliminar()" class="btn btn-danger">Eliminar</a>
+                <a ng-click="guardar(form)" class="btn btn-success">Guardar</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input ng-model="cliente.nombre" type="text" class="form-control" name="nombre" id="nombre" required/>
+            <p ng-show="form.nombre.$error.required && b" class="text-danger">Es necesario introducir un nombre</p>
+        </div>
+        <div ng-hide="cliente.regimen.id">
+            <div class="form-group">
+                <label for="apellidoPaterno">Apellido Paterno</label>
+                <input type="text" ng-model="cliente.apellidoPaterno" class="form-control" id="apellidoPaterno"/>
+            </div>
+            <div class="form-group">
+                <label for="apellidoMaterno">Apellido Materno</label>
+                <input type="text" ng-model="cliente.apellidoMaterno" class="form-control" id="apellidoMaterno"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>RFC</label>
+            <input ng-model="cliente.rfc" ui-mask="{{mascara()}}" type="text" name="rfc" class="form-control"/>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+<div>
+    <div class="pull-right">
+        <a href="#/productos/nuevo" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo Artículo</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Clave Artículo</th>
+            <th>Descripción</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="producto in productos">
+            <td>{{producto.codigo}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td><a href="#/productos/editar/{{producto.codigo}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
